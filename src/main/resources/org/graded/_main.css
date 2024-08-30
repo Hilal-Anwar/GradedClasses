@@ -21,7 +21,7 @@
     -fx-border-radius-radius: 10px;
     -fx-font-family: 'Montserrat Bold';
     -fx-font-size: 15px;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.12, -1.0, 2.0);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.12, -1.0, 2.0);
 
 }
 

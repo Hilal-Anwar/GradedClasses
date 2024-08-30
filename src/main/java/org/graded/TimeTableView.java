@@ -25,8 +25,6 @@ public class TimeTableView extends HBox {
 
     private void init() {
         this.setPadding(new Insets(10.8, 10, 10, 10.8));
-        this.setFillHeight(true);
-        this.setMaxSize(Double.MAX_VALUE, Region.USE_COMPUTED_SIZE);
         for (int i = 0; i < text.length; i++) {
             String s = text[i];
             var t = new Text(s.trim());
@@ -43,6 +41,7 @@ public class TimeTableView extends HBox {
             if (i < text.length - 1)
                 this.getChildren().add(separator);
         }
+        System.out.println(this.heightProperty());
     }
 
 

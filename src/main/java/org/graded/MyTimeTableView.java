@@ -32,19 +32,21 @@ public class MyTimeTableView implements Initializable {
                 var default_code = color_.get("07:00");
                 TimeTableLoader timeTableLoader = new TimeTableLoader();
                 var vr = timeTableLoader.getTimeTableLinkedList();
-                int rt = 0;
                 var frt = vr.getFirst().getDataList();
                 var vm = vr.getFirst();
+                int size = vr.size();
                 co.add(new TimeTableView("#073b4c60", frt, vm.time(), vm.grade(), vm.roomNo(), vm.subject()));
                 for (int i = 1; i < vr.size(); i++) {
                     var k = vr.get(i);
-                    co.add(new TimeTableView(color_.get(k.time().substring(0,k.time().indexOf(' '))) != null ?
-                            color_.get(k.time().substring(0,k.time().indexOf(' '))) : default_code, frt, k.time(), k.grade(), k.roomNo(), k.subject()));
-                    rt++;
+                    co.add(new TimeTableView(color_.get(k.time().substring(0, k.time().indexOf(' '))) != null ?
+                            color_.get(k.time().substring(0, k.time().indexOf(' '))) : default_code, frt, k.time(), k.grade(), k.roomNo(), k.subject()));
                 }
-
                 var list = FXCollections.observableList(co);
                 custList.setItems(list);
+                System.out.println(root_layout.getChildren());
+                double v = (size) * (15.9609375+10.8)*2.335 + root_layout.getSpacing() * (root_layout.getChildren().size()) + 10;
+                root_layout.setMaxHeight(v);
+                System.out.println(v);
             });
         }
 
