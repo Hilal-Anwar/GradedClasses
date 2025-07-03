@@ -41,7 +41,7 @@ public class TimeTableView extends HBox {
             if (i < text.length - 1)
                 this.getChildren().add(separator);
         }
-        System.out.println(this.heightProperty());
+       // System.out.println(this.heightProperty());
     }
 
 

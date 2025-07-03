@@ -31,7 +31,7 @@
          </VBox.margin>
       </ListView>
       <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-         <Image url="@my-logo.png" />
+         <Image url="@my-logo.svg" />
       </ImageView>
    </VBox>
 </StackPane>

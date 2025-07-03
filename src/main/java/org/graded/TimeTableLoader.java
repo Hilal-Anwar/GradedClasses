@@ -23,7 +23,7 @@ public class TimeTableLoader {
 
         FileInputStream file;
         try {
-            var filename = System.getProperty("user.home") + "\\OneDrive - MSFT\\GRADED_DATA\\TIME_LEADER_BOARD\\time_table_leader.xlsx";
+            var filename = "G:/My Drive/time_table_leader.xlsx";
             file = new FileInputStream(filename);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -36,7 +36,6 @@ public class TimeTableLoader {
             throw new RuntimeException(e);
         }
         XSSFSheet sheet = workbook.getSheetAt(getIndex(new Date()));
-        timeTableLinkedList.add(new TimeTable("Time", "Class", "Room No.", "Subject"));
 
         for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
             Row row = sheet.getRow(rowNum);
@@ -46,6 +45,7 @@ public class TimeTableLoader {
                         "" + row.getCell(3));
                 timeTableLinkedList.add(stu);
             }
+            //System.out.println(timeTableLinkedList);
         }
     }
 

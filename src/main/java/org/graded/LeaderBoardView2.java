@@ -32,7 +32,7 @@ public class LeaderBoardView2 implements Initializable {
                 for (var k : vr) {
                     if (ind > 10) {
                         co.add(new CustomView(ind,
-                                k.name(), "Class " + k.grade(),
+                                Name.make_word_name(k.name().trim()), "Class " + k.grade(),
                                 "" + (int) k.points(), "#68926d20"));
                     }
                     ind++;

@@ -4,12 +4,14 @@
 
 #title {
     -fx-font-size: 40px;
-    -fx-font-family: 'Montserrat Bold';
+    -fx-font-family: 'Gilroy-ExtraBold';
+    
 }
 
 #layer {
 
     -fx-background-image: url('my_back.png');
+    -fx-background-color:transparent;
     -fx-background-size: cover;
 
 }

@@ -43,10 +43,10 @@ public class MyTimeTableView implements Initializable {
                 }
                 var list = FXCollections.observableList(co);
                 custList.setItems(list);
-                System.out.println(root_layout.getChildren());
-                double v = (size) * (15.9609375+10.8)*2.335 + root_layout.getSpacing() * (root_layout.getChildren().size()) + 10;
+                //System.out.println(root_layout.getChildren());
+                double v = (size) * (15.9609375+10.8)*2.335 + root_layout.getSpacing() * (root_layout.getChildren().size()) + 30;
                 root_layout.setMaxHeight(v);
-                System.out.println(v);
+               // System.out.println(v);
             });
         }
 

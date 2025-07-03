@@ -54,8 +54,8 @@ public class CustomView extends HBox {
         Text t1 = new Text(text1);
         Text t2 = new Text(text2);
         Text t3 = new Text(text3);
-        t2.setWrappingWidth(200);
-        t1.setWrappingWidth(200);
+        t2.setWrappingWidth(250);
+        t1.setWrappingWidth(250);
         t3.setStyle("-fx-fill:" + code + ";");
         if (image_src != null)
             image_layer.getChildren().add(imageViewer);

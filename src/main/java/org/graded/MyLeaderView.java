@@ -34,31 +34,31 @@ public class MyLeaderView implements Initializable {
 
                         case 1 ->
                                 co.add(new CustomView(1, "b2.png",
-                                        k.name(), "Class " + k.grade(),
+                                        Name.make_word_name(k.name()), "Class " + k.grade(),
                                         "" +  (int)k.points(), "#C29B0C20"));
                         case 2 ->
                                 co.add(new CustomView(2,
-                                        "b3.png", k.name(),
+                                        "b3.png", Name.make_word_name(k.name()),
                                         "Class " + k.grade(),
                                         "" +  (int)k.points(), "#98afcf20"));
                         case 3 ->
                                 co.add(new CustomView(3,
-                                        "b4.png", k.name(),
+                                        "b4.png", Name.make_word_name(k.name()),
                                         "Class " + k.grade(),
                                         "" + (int)k.points(), "#99422720"));
                         default -> co.add(new CustomView(ind,
-                                k.name(), "Class " + k.grade(),
+                                Name.make_word_name(k.name().trim()), "Class " + k.grade(),
                                 "" + (int) k.points(), "#68926d20"));
                     }
                     ind++;
                     if (ind == 11)
                         break;
                 }
-
                 var list = FXCollections.observableList(co);
                 custList.setItems(list);
             });
         }
 
     }
+
 }

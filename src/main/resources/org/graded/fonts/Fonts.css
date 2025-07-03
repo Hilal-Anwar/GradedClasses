@@ -5,3 +5,10 @@
 	font-display: swap;
 	src: url('../fonts/Montserrat/static/Montserrat-Bold.ttf') format('truetype');
 }
+@font-face {
+	font-family: 'Gilroy-ExtraBold';
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+	src: url('../fonts/Gilroy-ExtraBold.otf') format('truetype');
+}

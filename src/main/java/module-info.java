@@ -8,6 +8,7 @@ module org.graded {
     requires org.apache.poi.poi;
     requires org.apache.logging.log4j.core;
     requires org.apache.poi.ooxml;
+    requires java.desktop;
     opens org.graded to javafx.fxml;
     exports org.graded;
 }
