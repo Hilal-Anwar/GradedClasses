@@ -47,11 +47,13 @@ public class LayoutAnimator {
             }
         };
         var v1 = new KeyFrame(Duration.seconds(30  ),eventHandler);
-        var v2 = new KeyFrame(Duration.seconds(15  ));
-        var v3 = new KeyFrame(Duration.seconds(15  ));
+        var v2 = new KeyFrame(Duration.seconds(25  ));
+        var v3 = new KeyFrame(Duration.seconds(25  ));
+        var v4 = new KeyFrame(Duration.seconds(25  ));
+        var v5 = new KeyFrame(Duration.seconds(25  ));
 
         // Timeline Animation
-        Timeline animation = new Timeline( v1,v2,v3);
+        Timeline animation = new Timeline( v1,v2,v3,v4,v5);
 
         animation.setCycleCount(Timeline.INDEFINITE);
         return animation;
