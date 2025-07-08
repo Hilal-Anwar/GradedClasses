@@ -1,9 +1,5 @@
 # GradedClasses
 
-
-https://github.com/user-attachments/assets/97a5ee86-ccac-4c79-9813-2d48a69e2ee5
-
-
 GradedClasses is a Java-based application designed to manage and calculate student grades. It provides functionality to input student scores, calculate averages, and determine letter grades based on predefined thresholds. This project is ideal for educational institutions or instructors looking to automate grade calculations.
 
 ## Table of Contents
@@ -34,7 +30,6 @@ To run this project, you need:
 - **Java Development Kit (JDK)**: Version 8 or higher.
 - **Maven**: For dependen
 
-https://github.com/user-attachments/assets/14dff74f-cc68-4590-8d07-f85f92801c7a
 
 cy management and building the project.
 - A terminal or IDE (e.g., IntelliJ IDEA, Eclipse) to compile and run the Java code.
@@ -88,6 +83,10 @@ Contributions are welcome! To contribute:
 5. Create a pull request.
 
 Please ensure your code follows the existing style and includes appropriate comments.
+
+
+https://github.com/user-attachments/assets/98edc56d-ccbe-4e93-87ce-e052a9c82796
+
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
