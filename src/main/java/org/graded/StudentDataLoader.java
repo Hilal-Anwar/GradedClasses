@@ -1,13 +1,7 @@
 package org.graded;
 
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.RichTextString;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import java.io.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -24,80 +18,30 @@ public class StudentDataLoader {
     }
 
     public List<Student> getStudentStream() {
-        List<Student> list = new ArrayList<>();
-        for (Student student : studentTreeMap.values()) {
-            list.add(student);
-        }
+        List<Student> list = new ArrayList<>(studentTreeMap.values());
         list.sort(Comparator.comparing(Student::points, Comparator.reverseOrder()));
         System.out.println(list);
         return list;
     }
 
     StudentDataLoader() {
-        String filename = "";
-        FileInputStream file;
-        try {
-            filename = "G:/My Drive/time_table_leader.xlsx";
+        init();
+    }
 
-            file = new FileInputStream(filename);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+    private void init() {
+        DatabaseLoader databaseLoader = new DatabaseLoader("G:/My Drive/", "LeaderBoard.db");
+        try (var x = databaseLoader.getStatement().executeQuery("SELECT * FROM LEADERS")) {
 
-
-        XSSFWorkbook workbook = null;
-        try {
-            workbook = new XSSFWorkbook(file);
-            //System.out.println("Info :  " + workbook.getProperties().getCoreProperties().getModified());
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        XSSFSheet sheet = workbook.getSheetAt(0);
-        for (int rowNum = 1; rowNum <=sheet.getLastRowNum(); rowNum++) {
-            Row row = sheet.getRow(rowNum);
-            if (row != null ) {
-                var stu = new Student(row.getCell(0).getStringCellValue(),
-                        getAsRequired(row.getCell(1)), getAsRequired(row.getCell(2)),
-                        row.getCell(3).getNumericCellValue());
-                studentTreeMap.put(row.getCell(0).getStringCellValue(), stu);
+            while (x.next()) {
+                var stu = new Student(x.getString("ED No."),
+                        x.getString("Name"), x.getString("Class"),
+                        Double.parseDouble(x.getString("Points")));
+                studentTreeMap.put(x.getString("ED No."), stu);
             }
-        }
-
-       // workbook.getSheetAt(8).getRow(2).getCell(2).setCellValue("VII");
-        FileOutputStream outFile = null;
-        try {
-            outFile = new FileOutputStream(filename);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            workbook.write(outFile);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            outFile.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            file.close();
-        } catch (IOException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    String getAsRequired(Cell c) {
-        try {
-
-                int x = (int) c.getNumericCellValue();
-                return "" + x;
-
-        } catch (IllegalStateException e) {
-            return c.getStringCellValue();
-        }
-    }
 
 }

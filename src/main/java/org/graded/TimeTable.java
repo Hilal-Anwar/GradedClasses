@@ -1,3 +1,4 @@
+/*
 package org.graded;
 
 
@@ -67,3 +68,4 @@ public final class TimeTable {
     }
 
 }
+*/

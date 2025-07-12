@@ -3,12 +3,10 @@ module org.graded {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
-
+    requires org.xerial.sqlitejdbc;
     requires java.sql;
-    requires org.apache.poi.poi;
-    requires org.apache.logging.log4j.core;
-    requires org.apache.poi.ooxml;
+    requires org.slf4j.nop;
     requires java.desktop;
-    opens org.graded to javafx.fxml;
+    opens org.graded to javafx.fxml, java.sql, org.xerial.sqlitejdbc;
     exports org.graded;
 }

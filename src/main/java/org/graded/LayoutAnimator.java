@@ -46,14 +46,14 @@ public class LayoutAnimator {
                 ft.play();
             }
         };
-        var v1 = new KeyFrame(Duration.seconds(30  ),eventHandler);
-        var v2 = new KeyFrame(Duration.seconds(25  ));
-        var v3 = new KeyFrame(Duration.seconds(25  ));
-        var v4 = new KeyFrame(Duration.seconds(25  ));
-        var v5 = new KeyFrame(Duration.seconds(25  ));
+        var v1 = new KeyFrame(Duration.seconds(25), eventHandler);
+        var v2 = new KeyFrame(Duration.seconds(25));
+        var v3 = new KeyFrame(Duration.seconds(10));
+       // var v4 = new KeyFrame(Duration.seconds(25));
+        //var v5 = new KeyFrame(Duration.seconds(25));
 
         // Timeline Animation
-        Timeline animation = new Timeline( v1,v2,v3,v4,v5);
+        Timeline animation = new Timeline(v1, v2, v3);
 
         animation.setCycleCount(Timeline.INDEFINITE);
         return animation;
