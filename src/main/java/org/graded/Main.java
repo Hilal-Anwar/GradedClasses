@@ -1,7 +1,6 @@
 package org.graded;
 
 
-import atlantafx.base.theme.CupertinoDark;
 import atlantafx.base.theme.PrimerLight;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -27,8 +26,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader1 = new FXMLLoader(LeaderboardResourcesLoader.loadURL("leader_board_view1.fxml"));
-        FXMLLoader loader2 = new FXMLLoader(LeaderboardResourcesLoader.loadURL("leader_board_view2.fxml"));
+        FXMLLoader loader1 = new FXMLLoader(LeaderboardResourcesLoader.loadURL("fxml/leader_board_view1.fxml"));
+        FXMLLoader loader2 = new FXMLLoader(LeaderboardResourcesLoader.loadURL("fxml/leader_board_view2.fxml"));
         StudentDataLoader studentDataLoader = new StudentDataLoader();
         var l1 = new Leaderboard1(studentDataLoader);
         var l2 = new LeaderBoard2(studentDataLoader);
@@ -56,14 +55,15 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.setTitle("Graded Management");
         stage.getIcons().add(new Image(Objects.requireNonNull(getClass().
-                getResourceAsStream("__logo.png"))));
-
+                getResourceAsStream("icons/__logo.png"))));
         Stage stage2 = new Stage();
         stage2.setTitle("Points Table");
-       Application.setUserAgentStylesheet(new PrimerLight().getUserAgentStylesheet());
-        var pointsTable = new FXMLLoader(LeaderboardResourcesLoader.loadURL("data_edit.fxml"));
-        pointsTable.setControllerFactory(_ -> new PointsTable(studentDataLoader,l1.customViews,l2.customViews));
-        stage2.setScene(new Scene(pointsTable.load(), 500, 500));
+        stage2.getIcons().add(new Image(Objects.requireNonNull(getClass().
+                getResourceAsStream("icons/__logo.png"))));
+        Application.setUserAgentStylesheet(new PrimerLight().getUserAgentStylesheet());
+        var pointsTable = new FXMLLoader(LeaderboardResourcesLoader.loadURL("fxml/data_edit.fxml"));
+        pointsTable.setControllerFactory(_ -> new PointsTable(studentDataLoader,l1.customViews,l2.customViews,stage2));
+        stage2.setScene(new Scene(pointsTable.load(), 700, 600));
         stage.show();
         scene.setOnKeyPressed(event -> {
             stage.setFullScreen(event.getCode() == KeyCode.F11 && !stage.isFullScreen());
@@ -103,7 +103,6 @@ public class Main extends Application {
     }
 
     public record WinnerInfo(String name, String garde, String img_path) {
-
     }
 
 }

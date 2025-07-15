@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.PreparedStatement;
@@ -33,11 +34,13 @@ public class PointsTable implements Initializable {
     ArrayList<String> sqlQueries = new ArrayList<>();
     ObservableList<Map<String, Object>> items = FXCollections.observableArrayList();
     int max_ed;
+    Stage stage2;
 
-    public PointsTable(StudentDataLoader studentDataLoader, ArrayList<CustomView> l1, ArrayList<CustomView> l2) {
+    public PointsTable(StudentDataLoader studentDataLoader, ArrayList<CustomView> l1, ArrayList<CustomView> l2, Stage stage2) {
         this.studentDataLoader = studentDataLoader;
         this.l1 = l1;
         this.l2 = l2;
+        this.stage2 = stage2;
     }
 
     @Override
@@ -130,11 +133,14 @@ public class PointsTable implements Initializable {
             }
 
         }
+        if (!sqlQueries.isEmpty()) {
+            var alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Marks got updated");
+            alert.show();
+        }
         sqlQueries.clear();
-        var alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information");
-        alert.setHeaderText("Marks got updated");
-        alert.show();
+
     }
 
     @FXML
@@ -177,20 +183,22 @@ public class PointsTable implements Initializable {
 
     @FXML
     public void addNewStudent() {
-        String ed = "ED" + (Integer.parseInt(studentDataLoader.getStudentList().getLast().
-                id().replace("ED", "")) + 1);
-        updateNewStudent(ed, new_name.getText(), new_class.getText(), 0);
-        studentDataLoader.getStudentLinkedHashMap().put("ED" + (max_ed + 1), new Student("ED" + (max_ed + 1), new_name.getText(), new_class.getText(), 0));
-        Map<String, Object> item1 = getStringObjectMap(studentDataLoader.getStudentList().getLast());
-        items.add(item1);
-        max_ed++;
-        new_ed.setText("ED" + (max_ed + 1));
-        new_name.setText("");
-        new_class.setText("");
-        var alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information");
-        alert.setHeaderText("New Student added");
-        alert.show();
+        if (!new_name.getText().isEmpty() && !new_class.getText().isEmpty()) {
+            String ed = "ED" + (Integer.parseInt(studentDataLoader.getStudentList().getLast().
+                    id().replace("ED", "")) + 1);
+            updateNewStudent(ed, new_name.getText(), new_class.getText(), 0);
+            studentDataLoader.getStudentLinkedHashMap().put("ED" + (max_ed + 1), new Student("ED" + (max_ed + 1), new_name.getText(), new_class.getText(), 0));
+            Map<String, Object> item1 = getStringObjectMap(studentDataLoader.getStudentList().getLast());
+            items.add(item1);
+            max_ed++;
+            new_ed.setText("ED" + (max_ed + 1));
+            new_name.setText("");
+            new_class.setText("");
+            var alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("New Student added");
+            alert.show();
+        }
     }
 
     public void updateNewStudent(String edNo, String name, String className, int points) {
@@ -218,5 +226,9 @@ public class PointsTable implements Initializable {
 
     }
 
+    @FXML
+    private void onClose() {
+        stage2.close();
+    }
 
 }

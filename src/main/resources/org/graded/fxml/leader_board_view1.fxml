@@ -10,8 +10,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane id="layer" stylesheets="@_main.css" xmlns="http://javafx.com/javafx/24" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded.LeaderBoard2">
-    <VBox id="customListView_hold" fx:id="root_layout" alignment="CENTER" maxHeight="950.0" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="5.0">
+<StackPane id="layer" stylesheets="@../css/_main.css" xmlns="http://javafx.com/javafx/24" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded.Leaderboard1">
+    <VBox id="customListView_hold" fx:id="root_layout" alignment="CENTER" maxHeight="955.0" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="5.0">
         <HBox alignment="BOTTOM_CENTER">
             <VBox.margin>
                 <Insets top="20.0" />
@@ -28,10 +28,10 @@
             </VBox.margin>
         </ListView>
         <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="@my-logo.png" />
+            <Image url="@../icons/my-logo.png" />
         </ImageView>
       <StackPane.margin>
-         <Insets bottom="100.0" left="30.0" right="30.0" top="100.0" />
+         <Insets bottom="100.0" left="40.0" right="40.0" top="100.0" />
       </StackPane.margin>
     </VBox>
 </StackPane>

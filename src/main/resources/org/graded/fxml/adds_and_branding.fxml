@@ -3,6 +3,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane stylesheets="@presenter.css" xmlns="http://javafx.com/javafx/24" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded.AddsAndBranding">
+<StackPane stylesheets="@../css/presenter.css" xmlns="http://javafx.com/javafx/24" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded.AddsAndBranding">
     <ImageView fitHeight="1350.0" fitWidth="850.0" pickOnBounds="true"  fx:id="branding" />
 </StackPane>

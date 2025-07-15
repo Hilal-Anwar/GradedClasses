@@ -1,14 +1,7 @@
 @font-face {
-	font-family: 'Montserrat';
+	font-family: 'Helvetica Rounded';
 	font-weight: bold;
 	font-style: normal;
 	font-display: swap;
-	src: url('../fonts/Montserrat/static/Montserrat-Bold.ttf') format('truetype');
-}
-@font-face {
-	font-family: 'Gilroy-ExtraBold';
-	font-weight: bold;
-	font-style: normal;
-	font-display: swap;
-	src: url('../fonts/Gilroy-ExtraBold.otf') format('truetype');
+	src: url('../fonts/helvetica_rounded_bold.otf') format('truetype');
 }

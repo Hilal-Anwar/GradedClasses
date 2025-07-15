@@ -19,8 +19,9 @@ public class LeaderBoard2 implements Initializable {
     VBox root_layout;
     @FXML
     ListView<CustomView> customListView;
-    ArrayList<CustomView> customViews=new ArrayList<>();
+    ArrayList<CustomView> customViews = new ArrayList<>();
     StudentDataLoader studentDataLoader;
+
     public LeaderBoard2(StudentDataLoader studentDataLoader) {
         this.studentDataLoader = studentDataLoader;
     }
@@ -30,16 +31,11 @@ public class LeaderBoard2 implements Initializable {
         try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
             executor.execute(() -> {
                 var vr = studentDataLoader.getSortedStudentList();
-                int ind = 1;
-                for (var k : vr) {
-                    if (ind > 12) {
-                       customViews.add(new CustomView(ind,
-                                Name.make_word_name(k.name().trim()), "Class " + k.grade(),
-                                "" + (int) k.points(), "#68926d20"));
-                    }
-                    ind++;
-                    if (ind == 25)
-                        break;
+                for (int i = 11; i < 20; i++) {
+                    var k = vr.get(i);
+                    customViews.add(new CustomView(i,
+                            Name.make_word_name(k.name().trim()), "Class " + k.grade(),
+                            "" + (int) k.points(), "#68926d20"));
                 }
 
                 var list = FXCollections.observableList(customViews);

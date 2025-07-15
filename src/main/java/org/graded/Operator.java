@@ -29,7 +29,7 @@ class Operators {
                 .replaceAll("\\*-", k2)
                 .replaceAll("\\^-", k3)
                 .replaceAll("E\\+", k4)
-                .replaceAll("E\\-", k5)
+                .replaceAll("E-", k5)
                 .replaceAll("-", "+-");
         return val;
     }

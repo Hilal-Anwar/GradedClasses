@@ -1,15 +1,14 @@
-@import './fonts/Fonts.css';
-@import 'MFXColors.css';
-@import 'Common.css';
+@import '../fonts/Fonts.css';
+
 
 #title {
     -fx-font-size: 40px;
-    -fx-font-family: 'Gilroy-ExtraBold';
+    -fx-font-family: 'Helvetica Rounded';
 }
 
 #layer {
 
-    -fx-background-image: url('my_back.png');
+    -fx-background-image: url('../icons/my_back.png');
     -fx-background-color:transparent;
     -fx-background-size: cover;
 
@@ -20,7 +19,7 @@
     -fx-background-radius: 10;
     -fx-background-color: #1c75bc20;
     -fx-border-radius-radius: 10px;
-    -fx-font-family: 'Montserrat Bold';
+    -fx-font-family: 'Helvetica Rounded';
     -fx-font-size: 15px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.12, -1.0, 2.0);
 
@@ -88,6 +87,7 @@
 
 #customListView .list-cell {
     -fx-background-color: #fafafa;
+    -fx-padding: 1.5;
     -fx-background-radius: 10;
 }
 .table-view .table-cell{

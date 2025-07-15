@@ -28,7 +28,6 @@ public class LayoutAnimator {
     private Timeline getTimeline() {
         EventHandler<ActionEvent> eventHandler = e -> {
             if (imgIndex < nodes.length - 1) {
-                // Adding Children
                 pane.getChildren().remove(nodes[imgIndex]);
                 imgIndex++;
                 pane.getChildren().add(nodes[imgIndex]);
@@ -45,13 +44,19 @@ public class LayoutAnimator {
                 ft.setToValue(1);
                 ft.play();
             }
+            System.out.println("This is a " + imgIndex + " iteration");
         };
-        var v1 = new KeyFrame(Duration.seconds(40), eventHandler);
-        var v2 = new KeyFrame(Duration.seconds(40));
-        var v3 = new KeyFrame(Duration.seconds(5));
-
-        // Timeline Animation
-        Timeline animation = new Timeline(v1, v2, v3);
+        int k = 15;
+        KeyFrame[] keyFrames = new KeyFrame[nodes.length];
+        keyFrames[0] = new KeyFrame(Duration.seconds(k), eventHandler);
+        keyFrames[1] = new KeyFrame(Duration.seconds(2 * k), eventHandler);
+        k = k * 2;
+        for (int i = 2; i < nodes.length; i++) {
+            keyFrames[i] = new KeyFrame(Duration.seconds(k + 7), eventHandler);
+            k = k + 7;
+        }
+        System.out.println(nodes.length);
+        Timeline animation = new Timeline(keyFrames);
 
         animation.setCycleCount(Timeline.INDEFINITE);
         return animation;

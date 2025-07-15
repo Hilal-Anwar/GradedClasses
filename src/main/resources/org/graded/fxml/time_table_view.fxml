@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane id="layer" stylesheets="@_main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded.MyTimeTableView">
+<StackPane id="layer" stylesheets="@../css/_main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded.MyTimeTableView">
    <padding>
       <Insets bottom="130.0" left="160.0" right="160.0" top="130.0" />
    </padding>
@@ -31,7 +31,7 @@
          </VBox.margin>
       </ListView>
       <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-         <Image url="@my-logo.svg" />
+         <Image url="@../icons/my-logo.svg" />
       </ImageView>
    </VBox>
 </StackPane>
