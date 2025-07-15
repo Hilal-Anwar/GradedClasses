@@ -2,26 +2,25 @@ package org.graded;
 
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 
 
-// Main class
+
 public class StudentDataLoader {
-
-    private final LinkedHashMap<String, Student> studentTreeMap = new LinkedHashMap<>(20);
-
-    public LinkedHashMap<String, Student> getStudentTreeMap() {
-        return studentTreeMap;
+    private final LinkedHashMap<String, Student> studentLinkedHashMap = new LinkedHashMap<>(20);
+    public DatabaseLoader databaseLoader;
+    public LinkedHashMap<String, Student> getStudentLinkedHashMap() {
+        return studentLinkedHashMap;
     }
 
-    public List<Student> getStudentStream() {
-        List<Student> list = new ArrayList<>(studentTreeMap.values());
+    public List<Student> getSortedStudentList() {
+        List<Student> list = new ArrayList<>(studentLinkedHashMap.values());
         list.sort(Comparator.comparing(Student::points, Comparator.reverseOrder()));
-        System.out.println(list);
         return list;
+    }
+
+    public List<Student> getStudentList() {
+        return new ArrayList<>(studentLinkedHashMap.values());
     }
 
     StudentDataLoader() {
@@ -29,14 +28,14 @@ public class StudentDataLoader {
     }
 
     private void init() {
-        DatabaseLoader databaseLoader = new DatabaseLoader("G:/My Drive/", "LeaderBoard.db");
+        databaseLoader = new DatabaseLoader("G:/My Drive/", "LeaderBoard.db");
         try (var x = databaseLoader.getStatement().executeQuery("SELECT * FROM LEADERS")) {
 
             while (x.next()) {
                 var stu = new Student(x.getString("ED No."),
                         x.getString("Name"), x.getString("Class"),
                         Double.parseDouble(x.getString("Points")));
-                studentTreeMap.put(x.getString("ED No."), stu);
+                studentLinkedHashMap.put(x.getString("ED No."), stu);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

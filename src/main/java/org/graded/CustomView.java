@@ -13,6 +13,20 @@ public class CustomView extends HBox {
     private final String image_src;
     private final VBox layer1;
     private final HBox layer2;
+    Text t1 = new Text(), t2 = new Text(), t3 = new Text();
+
+    public Text getText1() {
+        return t1;
+    }
+
+    public Text getText2() {
+        return t2;
+    }
+
+    public Text getText3() {
+        return t3;
+    }
+
     private final HBox image_layer;
     private final HBox numPad_Back;
     private final StackPane numPad;
@@ -48,12 +62,12 @@ public class CustomView extends HBox {
         this.setPadding(new Insets(10, 10, 10, 10));
         this.setFillHeight(true);
         this.setMaxSize(Double.MAX_VALUE, Region.USE_COMPUTED_SIZE);
-        ImageView imageViewer=new ImageView();
+        ImageView imageViewer = new ImageView();
         if (image_src != null)
             imageViewer = getImageView();
-        Text t1 = new Text(text1);
-        Text t2 = new Text(text2);
-        Text t3 = new Text(text3);
+        t1.setText(text1);
+        t2.setText(text2);
+        t3.setText(text3);
         t2.setWrappingWidth(250);
         t1.setWrappingWidth(250);
         t3.setStyle("-fx-fill:" + code + ";");
@@ -90,7 +104,7 @@ public class CustomView extends HBox {
     }
 
     private ImageView getImageView() {
-        ImageView imageViewer = new ImageView(new Image(MFXDemoResourcesLoader.load(image_src)));
+        ImageView imageViewer = new ImageView(new Image(LeaderboardResourcesLoader.load(image_src)));
         imageViewer.setFitWidth(40);
         imageViewer.setFitHeight(40);
         imageViewer.setPreserveRatio(true);

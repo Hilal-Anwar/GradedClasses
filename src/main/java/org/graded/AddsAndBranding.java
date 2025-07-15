@@ -20,6 +20,5 @@ public class AddsAndBranding implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
        branding.setImage(new Image(new File(srcPath).toURI().toString()));
-        System.out.println(branding);
     }
 }

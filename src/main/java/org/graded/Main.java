@@ -1,21 +1,21 @@
 package org.graded;
 
 
+import atlantafx.base.theme.CupertinoDark;
+import atlantafx.base.theme.PrimerLight;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.*;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.TreeMap;
 import java.util.stream.Stream;
@@ -27,18 +27,24 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader1 = new FXMLLoader(MFXDemoResourcesLoader.loadURL("leader_board_view1.fxml"));
-        FXMLLoader loader2 = new FXMLLoader(MFXDemoResourcesLoader.loadURL("leader_board_view2.fxml"));
+        FXMLLoader loader1 = new FXMLLoader(LeaderboardResourcesLoader.loadURL("leader_board_view1.fxml"));
+        FXMLLoader loader2 = new FXMLLoader(LeaderboardResourcesLoader.loadURL("leader_board_view2.fxml"));
+        StudentDataLoader studentDataLoader = new StudentDataLoader();
+        var l1 = new Leaderboard1(studentDataLoader);
+        var l2 = new LeaderBoard2(studentDataLoader);
+        loader1.setControllerFactory(c -> l1);
+        loader2.setControllerFactory(c -> l2);
         StackPane leader1 = loader1.load();
         StackPane leader2 = loader2.load();
         var treeMap = listOfWinners("Winners");
         var list = brandList("Branding");
-        System.out.println(list);
         ArrayList<StackPane> panes = new ArrayList<>();
         panes.add(leader1);
         panes.add(leader2);
         for (var m : treeMap.keySet()) {
-            panes.add(new ImageSliderShow(treeMap.get(m).name, treeMap.get(m).garde, treeMap.get(m).img_path).getSliderPane());
+            panes.add(new ImageSliderShow(treeMap.get(m).name,
+                    treeMap.get(m).garde, treeMap.get(m).img_path).
+                    getSliderPane());
         }
         for (var a : list) {
             panes.add(new ImageSliderShow(a).getSliderPane());
@@ -49,18 +55,22 @@ public class Main extends Application {
         layoutAnimator.animate();
         stage.setScene(scene);
         stage.setTitle("Graded Management");
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().
+                getResourceAsStream("__logo.png"))));
+
+        Stage stage2 = new Stage();
+        stage2.setTitle("Points Table");
+       Application.setUserAgentStylesheet(new PrimerLight().getUserAgentStylesheet());
+        var pointsTable = new FXMLLoader(LeaderboardResourcesLoader.loadURL("data_edit.fxml"));
+        pointsTable.setControllerFactory(_ -> new PointsTable(studentDataLoader,l1.customViews,l2.customViews));
+        stage2.setScene(new Scene(pointsTable.load(), 500, 500));
+        stage.show();
         scene.setOnKeyPressed(event -> {
             stage.setFullScreen(event.getCode() == KeyCode.F11 && !stage.isFullScreen());
+            if (event.getCode() == KeyCode.P) {
+                stage2.show();
+            }
         });
-        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("__logo.png"))));
-        stage.show();
-
-
-       /* Stage stage2 = new Stage();
-        stage2.setTitle("Graded Management");
-        stage2.setScene(new Scene(new AnchorPane(),500,600));
-        stage2.setResizable(false);
-        stage2.show();*/
     }
 
     public TreeMap<Integer, WinnerInfo> listOfWinners(String path) {
@@ -70,7 +80,7 @@ public class Main extends Application {
                 String filename = p.getFileName().toString();
                 int id = Integer.parseInt(filename.substring(0, filename.indexOf('-')));
                 String _class = filename.substring(filename.indexOf('-') + 1, filename.lastIndexOf('-'));
-                String name = filename.substring(filename.lastIndexOf('-') +1,filename.lastIndexOf('.'));
+                String name = filename.substring(filename.lastIndexOf('-') + 1, filename.lastIndexOf('.'));
                 brandList.put(id, new WinnerInfo(name, _class, p.toAbsolutePath().toString()));
             });
 

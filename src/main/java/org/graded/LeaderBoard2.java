@@ -13,35 +13,38 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.concurrent.Executors;
 
-public class LeaderBoardView2 implements Initializable {
+public class LeaderBoard2 implements Initializable {
     public Text title;
     @FXML
     VBox root_layout;
     @FXML
-    ListView<CustomView> custList;
-
+    ListView<CustomView> customListView;
+    ArrayList<CustomView> customViews=new ArrayList<>();
+    StudentDataLoader studentDataLoader;
+    public LeaderBoard2(StudentDataLoader studentDataLoader) {
+        this.studentDataLoader = studentDataLoader;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ArrayList<CustomView> co = new ArrayList<>();
         try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
             executor.execute(() -> {
-                StudentDataLoader studentDataLoader = new StudentDataLoader();
-                var vr = studentDataLoader.getStudentStream();
+                var vr = studentDataLoader.getSortedStudentList();
                 int ind = 1;
                 for (var k : vr) {
-                    if (ind > 10) {
-                        co.add(new CustomView(ind,
+                    if (ind > 12) {
+                       customViews.add(new CustomView(ind,
                                 Name.make_word_name(k.name().trim()), "Class " + k.grade(),
                                 "" + (int) k.points(), "#68926d20"));
                     }
                     ind++;
-                    if (ind == 21)
+                    if (ind == 25)
                         break;
                 }
 
-                var list = FXCollections.observableList(co);
-                custList.setItems(list);
+                var list = FXCollections.observableList(customViews);
+                customListView.setItems(list);
+
             });
         }
 

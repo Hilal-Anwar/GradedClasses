@@ -1,10 +1,5 @@
 package org.graded;
-/*
 
-Default path
-G:/My Drive/Graded/data/
-
- */
 
 import java.io.File;
 import java.sql.Connection;

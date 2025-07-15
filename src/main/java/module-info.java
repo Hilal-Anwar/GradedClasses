@@ -7,6 +7,7 @@ module org.graded {
     requires java.sql;
     requires org.slf4j.nop;
     requires java.desktop;
+    requires atlantafx.base;
     opens org.graded to javafx.fxml, java.sql, org.xerial.sqlitejdbc;
     exports org.graded;
 }

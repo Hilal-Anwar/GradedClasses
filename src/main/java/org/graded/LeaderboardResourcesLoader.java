@@ -5,13 +5,13 @@ package org.graded;
 import java.io.InputStream;
 import java.net.URL;
 
-public class MFXDemoResourcesLoader {
+public class LeaderboardResourcesLoader {
 
-	private MFXDemoResourcesLoader() {
+	private LeaderboardResourcesLoader() {
 	}
 
 	public static URL loadURL(String path) {
-		return MFXDemoResourcesLoader.class.getResource(path);
+		return LeaderboardResourcesLoader.class.getResource(path);
 	}
 
 	public static String load(String path) {
@@ -19,7 +19,7 @@ public class MFXDemoResourcesLoader {
 	}
 
 	public static InputStream loadStream(String name) {
-		return MFXDemoResourcesLoader.class.getResourceAsStream(name);
+		return LeaderboardResourcesLoader.class.getResourceAsStream(name);
 	}
 
 }

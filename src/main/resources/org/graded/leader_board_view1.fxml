@@ -10,8 +10,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane id="layer" stylesheets="@_main.css" xmlns="http://javafx.com/javafx/24" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded.MyLeaderView">
-    <VBox id="custList_hold" fx:id="root_layout" alignment="CENTER" maxHeight="955.0" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="5.0">
+<StackPane id="layer" stylesheets="@_main.css" xmlns="http://javafx.com/javafx/24" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded.Leaderboard1">
+    <VBox id="customListView_hold" fx:id="root_layout" alignment="CENTER" maxHeight="955.0" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="5.0">
         <HBox alignment="BOTTOM_CENTER">
             <VBox.margin>
                 <Insets top="20.0" />
@@ -22,7 +22,7 @@
                 </font>
             </Text>
         </HBox>
-        <ListView id="custList" fx:id="custList" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+        <ListView id="customListView" fx:id="customListView" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
             <VBox.margin>
                 <Insets left="40.0" right="40.0" top="5.0" />
             </VBox.margin>
