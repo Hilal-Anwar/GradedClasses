@@ -9,12 +9,15 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Objects;
 import java.util.TreeMap;
 import java.util.stream.Stream;
@@ -24,6 +27,9 @@ public class Main extends Application {
         launch(args);
     }
 
+    public static ArrayList<String> preview = new ArrayList<>();
+    public static LinkedHashMap<String, AnimationDuration> defaultAnimationDuration = new LinkedHashMap<>();
+    static File file = new File("G:\\My Drive\\duration.txt");
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader loader1 = new FXMLLoader(LeaderboardResourcesLoader.loadURL("fxml/leader_board_view1.fxml"));
@@ -31,8 +37,8 @@ public class Main extends Application {
         StudentDataLoader studentDataLoader = new StudentDataLoader();
         var l1 = new Leaderboard1(studentDataLoader);
         var l2 = new LeaderBoard2(studentDataLoader);
-        loader1.setControllerFactory(c -> l1);
-        loader2.setControllerFactory(c -> l2);
+        loader1.setControllerFactory(_ -> l1);
+        loader2.setControllerFactory(_ -> l2);
         StackPane leader1 = loader1.load();
         StackPane leader2 = loader2.load();
         var treeMap = listOfWinners("Winners");
@@ -40,6 +46,8 @@ public class Main extends Application {
         ArrayList<StackPane> panes = new ArrayList<>();
         panes.add(leader1);
         panes.add(leader2);
+        preview.add("Leaderboard1");
+        preview.add("Leaderboard2");
         for (var m : treeMap.keySet()) {
             panes.add(new ImageSliderShow(treeMap.get(m).name,
                     treeMap.get(m).garde, treeMap.get(m).img_path).
@@ -47,7 +55,16 @@ public class Main extends Application {
         }
         for (var a : list) {
             panes.add(new ImageSliderShow(a).getSliderPane());
+            preview.add(a.substring(a.lastIndexOf('\\') + 1, a.lastIndexOf('.')));
         }
+        if (file.length() != 0) {
+            DurationReader.durationReader();
+            DurationReader.updateDurationInDatabase();
+        } else {
+            generateDefaultAnimationDuration();
+            DurationReader.updateDurationInDatabase();
+        }
+        System.out.println("File things are done");
         StackPane root = new StackPane();
         Scene scene = new Scene(root);
         LayoutAnimator layoutAnimator = new LayoutAnimator(root, panes.toArray(new StackPane[0]));
@@ -62,7 +79,10 @@ public class Main extends Application {
                 getResourceAsStream("icons/__logo.png"))));
         Application.setUserAgentStylesheet(new PrimerLight().getUserAgentStylesheet());
         var pointsTable = new FXMLLoader(LeaderboardResourcesLoader.loadURL("fxml/data_edit.fxml"));
-        pointsTable.setControllerFactory(_ -> new PointsTable(studentDataLoader,l1.customViews,l2.customViews,stage2));
+        pointsTable.setControllerFactory(_ -> new PointsTable(studentDataLoader,
+                l1.customViews,
+                l2.customViews,
+                stage2));
         stage2.setScene(new Scene(pointsTable.load(), 700, 600));
         stage.show();
         scene.setOnKeyPressed(event -> {
@@ -100,6 +120,14 @@ public class Main extends Application {
             throw new RuntimeException(e);
         }
         return brandList;
+    }
+
+    private void generateDefaultAnimationDuration() {
+        defaultAnimationDuration.put(preview.getFirst(), new AnimationDuration(Duration.seconds(18).toSeconds(), Duration.seconds(2).toSeconds()));
+        defaultAnimationDuration.put(preview.get(1), new AnimationDuration(Duration.seconds(18).toSeconds(), Duration.seconds(2).toSeconds()));
+        for (int i = 2; i < preview.size(); i++) {
+            defaultAnimationDuration.put(preview.get(i), new AnimationDuration(Duration.seconds(7).toSeconds(), Duration.seconds(2).toSeconds()));
+        }
     }
 
     public record WinnerInfo(String name, String garde, String img_path) {

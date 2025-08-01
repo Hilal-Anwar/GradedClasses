@@ -104,7 +104,7 @@ public class CustomView extends HBox {
     }
 
     private ImageView getImageView() {
-        ImageView imageViewer = new ImageView(new Image(LeaderboardResourcesLoader.load(image_src)));
+        ImageView imageViewer = new ImageView(new Image(LeaderboardResourcesLoader.loadURL(image_src).toString()));
         imageViewer.setFitWidth(40);
         imageViewer.setFitHeight(40);
         imageViewer.setPreserveRatio(true);

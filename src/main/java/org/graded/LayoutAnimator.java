@@ -8,6 +8,9 @@ import javafx.event.EventHandler;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
+import static org.graded.Main.defaultAnimationDuration;
+import static org.graded.Main.preview;
+
 public class LayoutAnimator {
     private final Pane[] nodes;
     private int imgIndex = 0;
@@ -44,20 +47,24 @@ public class LayoutAnimator {
                 ft.setToValue(1);
                 ft.play();
             }
-            System.out.println("This is a " + imgIndex + " iteration");
         };
-        int k = 15;
-        KeyFrame[] keyFrames = new KeyFrame[nodes.length];
-        keyFrames[0] = new KeyFrame(Duration.seconds(k), eventHandler);
-        keyFrames[1] = new KeyFrame(Duration.seconds(2 * k), eventHandler);
-        k = k * 2;
-        for (int i = 2; i < nodes.length; i++) {
-            keyFrames[i] = new KeyFrame(Duration.seconds(k + 7), eventHandler);
-            k = k + 7;
-        }
-        System.out.println(nodes.length);
-        Timeline animation = new Timeline(keyFrames);
+        return getDefaultTimeline(eventHandler);
+    }
 
+    private Timeline getDefaultTimeline(EventHandler<ActionEvent> eventHandler) {
+        KeyFrame[] keyFrames = new KeyFrame[nodes.length];
+        int index = 0;
+        double previous_duration = defaultAnimationDuration.firstEntry().getValue().layoutDuration;
+        keyFrames[0] = new KeyFrame(Duration.seconds(previous_duration), eventHandler);
+
+        for (var key : defaultAnimationDuration.keySet()) {
+            if (index != 0) {
+                keyFrames[index] = new KeyFrame(Duration.seconds(defaultAnimationDuration.get(key).layoutDuration + previous_duration), eventHandler);
+                previous_duration = defaultAnimationDuration.get(key).layoutDuration + previous_duration;
+            }
+            index++;
+        }
+        Timeline animation = new Timeline(keyFrames);
         animation.setCycleCount(Timeline.INDEFINITE);
         return animation;
     }

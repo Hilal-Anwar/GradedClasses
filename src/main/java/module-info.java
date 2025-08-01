@@ -3,11 +3,9 @@ module org.graded {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
-    requires org.xerial.sqlitejdbc;
     requires java.sql;
-    requires org.slf4j.nop;
     requires java.desktop;
     requires atlantafx.base;
-    opens org.graded to javafx.fxml, java.sql, org.xerial.sqlitejdbc;
+    opens org.graded to javafx.fxml;
     exports org.graded;
 }

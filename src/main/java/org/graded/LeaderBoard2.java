@@ -31,7 +31,7 @@ public class LeaderBoard2 implements Initializable {
         try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
             executor.execute(() -> {
                 var vr = studentDataLoader.getSortedStudentList();
-                for (int i = 11; i < 20; i++) {
+                for (int i = 11; i <=22; i++) {
                     var k = vr.get(i);
                     customViews.add(new CustomView(i,
                             Name.make_word_name(k.name().trim()), "Class " + k.grade(),

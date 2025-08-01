@@ -5,7 +5,10 @@
     -fx-font-size: 40px;
     -fx-font-family: 'Helvetica Rounded';
 }
-
+#info{
+    -fx-font-size: 12px;
+    -fx-font-family: 'Helvetica Rounded';
+}
 #layer {
 
     -fx-background-image: url('../icons/my_back.png');
@@ -87,7 +90,7 @@
 
 #customListView .list-cell {
     -fx-background-color: #fafafa;
-    -fx-padding: 1.5;
+    -fx-padding: 0.5;
     -fx-background-radius: 10;
 }
 .table-view .table-cell{

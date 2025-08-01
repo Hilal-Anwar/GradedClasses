@@ -22,6 +22,7 @@ public class DatabaseLoader {
         var done = create(root_path);
         if (done) {
             try {
+                System.out.println("jdbc:sqlite:" + root_path + this.name);
                 connection = DriverManager.getConnection("jdbc:sqlite:" + root_path + this.name);
                 System.out.println("Opened database successfully");
             } catch (SQLException e) {

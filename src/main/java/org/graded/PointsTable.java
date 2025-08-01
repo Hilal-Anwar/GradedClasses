@@ -6,11 +6,15 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -35,13 +39,13 @@ public class PointsTable implements Initializable {
     ObservableList<Map<String, Object>> items = FXCollections.observableArrayList();
     int max_ed;
     Stage stage2;
-
     public PointsTable(StudentDataLoader studentDataLoader, ArrayList<CustomView> l1, ArrayList<CustomView> l2, Stage stage2) {
         this.studentDataLoader = studentDataLoader;
         this.l1 = l1;
         this.l2 = l2;
         this.stage2 = stage2;
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -111,11 +115,11 @@ public class PointsTable implements Initializable {
             if (i < 12) {
                 l1.get(i).getText1().setText(newSortedStudentList.get(i).getName());
                 l1.get(i).getText2().setText(newSortedStudentList.get(i).getGrade());
-                l1.get(i).getText3().setText(newSortedStudentList.get(i).points() + "");
+                l1.get(i).getText3().setText((int) newSortedStudentList.get(i).points() + "");
             } else {
                 l2.get(i - 12).getText1().setText(newSortedStudentList.get(i).getName());
                 l2.get(i - 12).getText2().setText(newSortedStudentList.get(i).getGrade());
-                l2.get(i - 12).getText3().setText(newSortedStudentList.get(i).points() + "");
+                l2.get(i - 12).getText3().setText((int) newSortedStudentList.get(i).points() + "");
             }
 
         }
@@ -229,6 +233,20 @@ public class PointsTable implements Initializable {
     @FXML
     private void onClose() {
         stage2.close();
+    }
+
+    @FXML
+    void changeDuration() {
+        Stage timerStage = new Stage();
+        timerStage.setTitle("Animation Duration");
+        try {
+            var layout = new FXMLLoader(LeaderboardResourcesLoader.loadURL("fxml/timer.fxml"));
+            layout.setControllerFactory(_ -> new Timer());
+            timerStage.setScene(new Scene(layout.load(),1100,720));
+            timerStage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

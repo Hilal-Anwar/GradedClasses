@@ -33,7 +33,7 @@ public class Leaderboard1 implements Initializable {
             executor.execute(() -> {
                 var vr = studentDataLoader.getSortedStudentList();
                 firstThree(vr);
-                for (int i = 4; i < 10; i++) {
+                for (int i = 4; i <=12; i++) {
                     var k = vr.get(i);
                     customViews.add(new CustomView(i,
                             Name.make_word_name(k.name().trim()), "Class " + k.grade(),

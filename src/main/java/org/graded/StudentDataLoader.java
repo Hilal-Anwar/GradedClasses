@@ -1,14 +1,14 @@
 package org.graded;
 
 
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.*;
-
 
 
 public class StudentDataLoader {
     private final LinkedHashMap<String, Student> studentLinkedHashMap = new LinkedHashMap<>(20);
     public DatabaseLoader databaseLoader;
+
     public LinkedHashMap<String, Student> getStudentLinkedHashMap() {
         return studentLinkedHashMap;
     }

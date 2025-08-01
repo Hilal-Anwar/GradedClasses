@@ -71,7 +71,20 @@
       </HBox>
       <HBox alignment="CENTER_RIGHT" spacing="20.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#onClose" text="Cancle" />
+            <HBox HBox.hgrow="ALWAYS">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#changeDuration" text="Animation duration">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/timer.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" onAction="#onClose" text="Cancel" />
             <Button minWidth="51.2" mnemonicParsing="false" onAction="#onApply" text="Apply" />
          </children>
          <padding>
