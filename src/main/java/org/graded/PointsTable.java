@@ -239,7 +239,7 @@ public class PointsTable implements Initializable {
         timerStage.setTitle("Animation Duration");
         try {
             var layout = new FXMLLoader(LeaderboardResourcesLoader.loadURL("fxml/timer.fxml"));
-            layout.setControllerFactory(_ -> new Timer());
+            layout.setControllerFactory(_ -> new Timer(timerStage));
             timerStage.setScene(new Scene(layout.load(),1100,720));
             timerStage.getIcons().add(new Image(Objects.requireNonNull(getClass().
                     getResourceAsStream("icons/__logo.png"))));

@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
@@ -23,18 +24,25 @@ public class Timer implements Initializable {
     @FXML
     private ListView<HBox> listView;
     ArrayList<HBox> list = new ArrayList<>();
+    Stage stage;
 
-    public Timer() {
+    public Timer(Stage stage) {
+        this.stage = stage;
     }
 
     @FXML
     void onApply() {
         DurationReaderData.updateDurationInDatabase();
+        var alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText("Animation timing got updated");
+        alert.show();
+        stage.close();
     }
 
     @FXML
     void onClose() {
-
+        stage.close();
     }
 
     @Override
@@ -61,7 +69,6 @@ public class Timer implements Initializable {
         timerStage.setTitle("About");
         try {
             var layout = new FXMLLoader(LeaderboardResourcesLoader.loadURL("fxml/about.fxml"));
-            layout.setControllerFactory(_ -> new Timer());
             timerStage.setScene(new Scene(layout.load()));
             timerStage.getIcons().add(new Image(Objects.requireNonNull(getClass().
                     getResourceAsStream("icons/__logo.png"))));

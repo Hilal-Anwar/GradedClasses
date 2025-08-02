@@ -72,26 +72,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--  <plugin>
-                  <groupId>org.panteleyev</groupId>
-                  <artifactId>jpackage-maven-plugin</artifactId>
-                  <version>1.6.0</version>
-                  <configuration>
-                      <name>Graded management</name>
-                      <appVersion>1.0.0</appVersion>
-                      <mainJar>LeaderBoard.jar</mainJar>
-                      <runtimeImage>target</runtimeImage>
-                      <vendor>org.graded</vendor>
-                      <icon>logo.ico</icon>
-                      <destination>target/dist</destination>
-                      <winShortcut>true</winShortcut>
-                      <winMenuGroup>Utilities</winMenuGroup>
-                      <input>target</input>
-                      <javaOptions>
-                          <option>-Dfile.encoding=UTF-8</option>
-                      </javaOptions>
-                  </configuration>
-              </plugin>!-->
         </plugins>
     </build>
 </project>
