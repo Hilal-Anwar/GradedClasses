@@ -5,8 +5,12 @@
     -fx-font-size: 40px;
     -fx-font-family: 'Helvetica Rounded';
 }
+#about_page{
+    -fx-background-color: "#182caf";
+}
 #info{
-    -fx-font-size: 12px;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
     -fx-font-family: 'Helvetica Rounded';
 }
 #layer {

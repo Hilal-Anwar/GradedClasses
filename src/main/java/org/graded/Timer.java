@@ -6,12 +6,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static org.graded.Main.defaultAnimationDuration;
@@ -27,7 +29,7 @@ public class Timer implements Initializable {
 
     @FXML
     void onApply() {
-        DurationReader.updateDurationInDatabase();
+        DurationReaderData.updateDurationInDatabase();
     }
 
     @FXML
@@ -61,6 +63,8 @@ public class Timer implements Initializable {
             var layout = new FXMLLoader(LeaderboardResourcesLoader.loadURL("fxml/about.fxml"));
             layout.setControllerFactory(_ -> new Timer());
             timerStage.setScene(new Scene(layout.load()));
+            timerStage.getIcons().add(new Image(Objects.requireNonNull(getClass().
+                    getResourceAsStream("icons/__logo.png"))));
             timerStage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);

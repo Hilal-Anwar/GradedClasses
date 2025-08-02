@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -18,10 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class PointsTable implements Initializable {
     @FXML
@@ -243,6 +241,8 @@ public class PointsTable implements Initializable {
             var layout = new FXMLLoader(LeaderboardResourcesLoader.loadURL("fxml/timer.fxml"));
             layout.setControllerFactory(_ -> new Timer());
             timerStage.setScene(new Scene(layout.load(),1100,720));
+            timerStage.getIcons().add(new Image(Objects.requireNonNull(getClass().
+                    getResourceAsStream("icons/__logo.png"))));
             timerStage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -11,7 +11,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -29,7 +28,7 @@ public class Main extends Application {
 
     public static ArrayList<String> preview = new ArrayList<>();
     public static LinkedHashMap<String, AnimationDuration> defaultAnimationDuration = new LinkedHashMap<>();
-    static File file = new File("G:\\My Drive\\duration.txt");
+
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader loader1 = new FXMLLoader(LeaderboardResourcesLoader.loadURL("fxml/leader_board_view1.fxml"));
@@ -57,13 +56,7 @@ public class Main extends Application {
             panes.add(new ImageSliderShow(a).getSliderPane());
             preview.add(a.substring(a.lastIndexOf('\\') + 1, a.lastIndexOf('.')));
         }
-        if (file.length() != 0) {
-            DurationReader.durationReader();
-            DurationReader.updateDurationInDatabase();
-        } else {
-            generateDefaultAnimationDuration();
-            DurationReader.updateDurationInDatabase();
-        }
+        DurationReaderData.init();
         System.out.println("File things are done");
         StackPane root = new StackPane();
         Scene scene = new Scene(root);
@@ -122,7 +115,7 @@ public class Main extends Application {
         return brandList;
     }
 
-    private void generateDefaultAnimationDuration() {
+    public static void generateDefaultAnimationDuration() {
         defaultAnimationDuration.put(preview.getFirst(), new AnimationDuration(Duration.seconds(18).toSeconds(), Duration.seconds(2).toSeconds()));
         defaultAnimationDuration.put(preview.get(1), new AnimationDuration(Duration.seconds(18).toSeconds(), Duration.seconds(2).toSeconds()));
         for (int i = 2; i < preview.size(); i++) {
